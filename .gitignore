@@ -1,0 +1,5 @@
+# vscode service scripts
+.vscode
+
+node_modules
+bower_components
