@@ -12,7 +12,7 @@ import { User } from '../shared/models/user';
         }
     `],
     template: `
-        <form action="" #form="ngForm">
+        <form action="" #form="ngForm" (ngSubmit)="onSubmit()" *ngIf="active">
         {{form.valid}}
          <div class="form-group" [ngClass]="{ 'has-error': name.invalid && name.touched}">
              <input type="text" class="form-control" name='name' 
@@ -38,5 +38,17 @@ import { User } from '../shared/models/user';
 
 export class   UserFormComponent {
     newUser: User = new User();
+    active: boolean = true;
+
+    onSubmit() {
+        console.log(this.newUser);
+
+        this.newUser = new User();
+        this.active = false;
+
+        setTimeout(() => this.active = true, 0)
+    };
+
+    
 }
 

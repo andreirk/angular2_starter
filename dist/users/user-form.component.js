@@ -13,12 +13,21 @@ var user_1 = require('../shared/models/user');
 var UserFormComponent = (function () {
     function UserFormComponent() {
         this.newUser = new user_1.User();
+        this.active = true;
     }
+    UserFormComponent.prototype.onSubmit = function () {
+        var _this = this;
+        console.log(this.newUser);
+        this.newUser = new user_1.User();
+        this.active = false;
+        setTimeout(function () { return _this.active = true; }, 0);
+    };
+    ;
     UserFormComponent = __decorate([
         core_1.Component({
             selector: 'user-form',
             styles: ["\n        form {\n            padding: 10px;\n            background: #ECF0F1;\n            border-radius: 3px;\n            margin-bottom: 30px;\n        }\n    "],
-            template: "\n        <form action=\"\" #form=\"ngForm\">\n        {{form.valid}}\n         <div class=\"form-group\" [ngClass]=\"{ 'has-error': name.invalid && name.touched}\">\n             <input type=\"text\" class=\"form-control\" name='name' \n             required placeholder=\"Name\"\n             [(ngModel)]=\"newUser.name\" #name=\"ngModel\">\n\n         <span class=\"help-block\" *ngIf=\"name.invalid && name.touched\"> Name is required </span>     \n         </div>\n         <div class=\"form-group\" [ngClass]=\"{ 'has-error': username.invalid && username.touched}\">\n             <input type=\"text\" class=\"form-control\" name='username' \n             required placeholder=\"Username\"\n              [(ngModel)]=\"newUser.username\" #username=\"ngModel\"\n              >\n               <span class=\"help-block\" *ngIf=\"username.invalid && username.touched\">User Name is required </span>\n         </div>\n\n        <button type=\"submit\" class=\"btn btn-lg btn-block btn-primary\"\n        [disabled]=\"form.invalid\">Create User\n        </button>\n        </form>\n    "
+            template: "\n        <form action=\"\" #form=\"ngForm\" (ngSubmit)=\"onSubmit()\" *ngIf=\"active\">\n        {{form.valid}}\n         <div class=\"form-group\" [ngClass]=\"{ 'has-error': name.invalid && name.touched}\">\n             <input type=\"text\" class=\"form-control\" name='name' \n             required placeholder=\"Name\"\n             [(ngModel)]=\"newUser.name\" #name=\"ngModel\">\n\n         <span class=\"help-block\" *ngIf=\"name.invalid && name.touched\"> Name is required </span>     \n         </div>\n         <div class=\"form-group\" [ngClass]=\"{ 'has-error': username.invalid && username.touched}\">\n             <input type=\"text\" class=\"form-control\" name='username' \n             required placeholder=\"Username\"\n              [(ngModel)]=\"newUser.username\" #username=\"ngModel\"\n              >\n               <span class=\"help-block\" *ngIf=\"username.invalid && username.touched\">User Name is required </span>\n         </div>\n\n        <button type=\"submit\" class=\"btn btn-lg btn-block btn-primary\"\n        [disabled]=\"form.invalid\">Create User\n        </button>\n        </form>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], UserFormComponent);
